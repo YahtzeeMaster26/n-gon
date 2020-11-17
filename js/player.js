@@ -429,7 +429,7 @@ const mech = {
     },
     baseHealth: 1,
     setMaxHealth() {
-        mech.maxHealth = mech.baseHealth + mod.bonusHealth + mod.armorFromPowerUps
+        mech.maxHealth = mech.baseHealth + mod.bonusHealth + mod.armorFromPowerUps + (mod.isHyperSaturation ? Infinity : 0)
         if (mech.health > mech.maxHealth) mech.health = mech.maxHealth;
         mech.displayHealth();
     },
@@ -451,7 +451,8 @@ const mech = {
             for (let i = 0, len = b.inventory.length; i < len; i++) {
                 dmg *= 0.85 // 1 - 0.15
             }
-        }
+				}
+				if (mod.isHyperSaturation) dmg *= 1.8
         return dmg
     },
     damage(dmg) {

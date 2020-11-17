@@ -1,3 +1,4 @@
+/* eslint-disable strict */ // please the eslint gods
 const mod = {
     totalCount: null,
     setupAllMods() {
@@ -1138,6 +1139,24 @@ const mod = {
                 mod.bonusHealth = 0
                 mech.setMaxHealth();
 
+            }
+        },
+        {
+            name: "hypersaturation",
+            description: "<strong>maximum</strong> <strong class='color-h'>health</strong> is unlimited<br>take <strong>80%</strong> more <strong class='color-d'>damage</strong>",
+            maxCount: 1,
+            count: 0,
+            allowed() {
+                return mod.bonusHealth > 0.5
+            },
+            requires: "2 supersaturation",
+            effect() {
+								mod.isHyperSaturation = true
+                mech.setMaxHealth();
+            },
+            remove() {
+							mod.isHyperSaturation = false
+                mech.setMaxHealth();
             }
         },
         {
@@ -3252,6 +3271,7 @@ const mod = {
     isExplosionHarm: null,
     armorFromPowerUps: null,
     bonusHealth: null,
+    isHyperSaturation: null,
     isIntangible: null,
     isCloakStun: null,
     bonusEnergy: null,
