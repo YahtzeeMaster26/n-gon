@@ -487,7 +487,7 @@ const m = {
     },
     baseHealth: 1,
     setMaxHealth() {
-        m.maxHealth = m.baseHealth + mod.bonusHealth + mod.armorFromPowerUps + (mod.isHyperSaturation ? Infinity : 0)
+        m.maxHealth = m.baseHealth + tech.bonusHealth + tech.armorFromPowerUps + (tech.isHyperSaturation ? Infinity : 0)
         document.getElementById("health-bg").style.width = `${Math.floor(300*m.maxHealth)}px`
         simulation.makeTextLog(`<span class='color-var'>m</span>.<span class='color-h'>maxHealth</span> <span class='color-symbol'>=</span> ${m.maxHealth.toFixed(2)}`)
         if (m.health > m.maxHealth) m.health = m.maxHealth;
@@ -496,7 +496,7 @@ const m = {
 
     defaultFPSCycle: 0, //tracks when to return to normal fps
     immuneCycle: 0, //used in engine
-    harmReduction() {
+    harmReduction() { // eslint-disable-line
         let dmg = 1
         dmg *= m.fieldHarmReduction
         if (tech.squirrelFx !== 1) dmg *= 1 + (tech.squirrelFx - 1) / 5 //cause more damage
@@ -513,7 +513,7 @@ const m = {
         if (tech.isEntanglement && b.inventory[0] === b.activeGun) {
             for (let i = 0, len = b.inventory.length; i < len; i++) dmg *= 0.87 // 1 - 0.15
         }
-				if (mod.isHyperSaturation) dmg *= 1.8
+				if (tech.isHyperSaturation) dmg *= 1.8
         return dmg
     },
     rewind(steps) { // m.rewind(Math.floor(Math.min(599, 137 * m.energy)))
@@ -619,7 +619,7 @@ const m = {
             }
         }
     },
-    damage(dmg) {
+    damage(dmg) { // eslint-disable-line
         if (tech.isRewindAvoidDeath && m.energy > 0.66) {
             const steps = Math.floor(Math.min(299, 137 * m.energy))
             simulation.makeTextLog(`<span class='color-var'>m</span>.rewind(${steps})`)

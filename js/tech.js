@@ -1,3 +1,8 @@
+/* eslint-disable strict */ // please the eslint gods
+/* eslint-disable prefer-arrow-callback */
+/* eslint-disable quotes */
+/* eslint-disable prefer-const */
+/* eslint-disable spaced-comment */
 const tech = {
     totalCount: null,
     setupAllTech() {
@@ -1565,7 +1570,25 @@ const tech = {
                 m.setMaxHealth();
 
             }
-        },
+				},
+        {
+					name: "hypersaturation",
+					description: "<strong>maximum</strong> <strong class='color-h'>health</strong> is unlimited<br>take <strong>80%</strong> more <strong class='color-d'>damage</strong>",
+					maxCount: 1,
+					count: 0,
+					allowed() {
+						return tech.bonusHealth > 0.5
+					},
+					requires: "2 supersaturation",
+					effect() {
+						tech.isHyperSaturation = true
+						m.setMaxHealth();
+					},
+					remove() {
+						tech.isHyperSaturation = false
+						m.setMaxHealth();
+					}
+				},
         {
             name: "inductive coupling",
             description: "for each unused <strong>power up</strong> at the end of a <strong>level</strong><br>add 3 <strong>max</strong> <strong class='color-h'>health</strong> <em>(up to 42 health per level)</em>",
@@ -4197,6 +4220,7 @@ const tech = {
     isExplosionHarm: null,
     armorFromPowerUps: null,
     bonusHealth: null,
+    isHyperSaturation: null,
     isIntangible: null,
     isCloakStun: null,
     bonusEnergy: null,
