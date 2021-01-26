@@ -33,7 +33,7 @@
     <!-- <body oncontextmenu="return false"> -->
     <div id='guns'></div>
     <div id='field'></div>
-    <div id='mods'></div>
+    <div id='tech'></div>
     <div id="text-log"></div>
     <div id="fade-out"></div>
     <div id="health-bg"></div>
@@ -41,6 +41,7 @@
     <div id="dmg"></div>
     <div id="choose-background"></div>
     <div id='construct'></div>
+    <!-- <input type="text" id="console" spellcheck="false" /> -->
     <!-- contenteditable="true" -->
 
     <!-- guns -->
@@ -52,16 +53,16 @@
 	<audio id="launcher" src="sounds\guns\launcher2.ogg" preload="auto"></audio> -->
 
     <!-- player walk -->
-    <!-- <audio id="walk1" src="sounds\mech\walk1.ogg" preload="auto"></audio>
-	<audio id="walk2" src="sounds\mech\walk2.ogg" preload="auto"></audio>
-	<audio id="walk3" src="sounds\mech\walk3.ogg" preload="auto"></audio>
-	<audio id="walk4" src="sounds\mech\walk4.ogg" preload="auto"></audio>
-	<audio id="walk5" src="sounds\mech\walk5.ogg" preload="auto"></audio>
-	<audio id="walk6" src="sounds\mech\walk6.ogg" preload="auto"></audio>
-	<audio id="walk7" src="sounds\mech\walk7.ogg" preload="auto"></audio>
-	<audio id="walk8" src="sounds\mech\walk8.ogg" preload="auto"></audio>
-	<audio id="walk9" src="sounds\mech\walk9.ogg" preload="auto"></audio>
-	<audio id="walk10" src="sounds\mech\walk10.ogg" preload="auto"></audio> -->
+    <!-- <audio id="walk1" src="sounds\m\walk1.ogg" preload="auto"></audio>
+	<audio id="walk2" src="sounds\m\walk2.ogg" preload="auto"></audio>
+	<audio id="walk3" src="sounds\m\walk3.ogg" preload="auto"></audio>
+	<audio id="walk4" src="sounds\m\walk4.ogg" preload="auto"></audio>
+	<audio id="walk5" src="sounds\m\walk5.ogg" preload="auto"></audio>
+	<audio id="walk6" src="sounds\m\walk6.ogg" preload="auto"></audio>
+	<audio id="walk7" src="sounds\m\walk7.ogg" preload="auto"></audio>
+	<audio id="walk8" src="sounds\m\walk8.ogg" preload="auto"></audio>
+	<audio id="walk9" src="sounds\m\walk9.ogg" preload="auto"></audio>
+	<audio id="walk10" src="sounds\m\walk10.ogg" preload="auto"></audio> -->
 
     <!-- player dmg -->
     <!-- <audio id="dmg0" src="sounds\dmg\dmg0.ogg" preload="auto"></audio>
@@ -80,16 +81,16 @@
     <!-- **********  intro page ***********************************************
 ******************************************************************************* -->
     <div id="choose-grid"></div>
-    <div id="build-grid"></div>
+    <div id="experiment-grid"></div>
     <div style="position: absolute; top:0;left:0;">
         <div id="pause-grid-left" class="pause-grid"></div>
     </div>
     <div style="position: absolute; top:0;right:0;">
         <div id="pause-grid-right" class="pause-grid"></div>
     </div>
-    <svg class="SVG-button" id="build-button" width="110" height="40">
+    <svg class="SVG-button" id="experiment-button" width="155" height="40" style="border: 2px #333 solid;">
         <g stroke='none' fill='#333' stroke-width="2" font-size="28px" font-family="Arial, sans-serif">
-            <text x="10" y="30">custom</text>
+            <text x="10" y="30">experiment</text>
         </g>
     </svg>
     <div id='info'>
@@ -113,12 +114,14 @@
                     <br>
                     <label for="classic-select" title="play older versions of n-gon">classic n-gon:</label>
                     <select name="classic-select" id="classic-select" onChange="window.location.href=this.value">
-                        <option value="https://codepen.io/lilgreenland/full/ozXNWZ" selected>9-6-2016</option>
-                        <option value="https://codepen.io/lilgreenland/full/wzARJY">10-2-2016</option>
-                        <option value="classic/7-1-2017/">7-1-2017</option>
-                        <option value="classic/1-4-2018/">1-4-2018</option>
-                        <option value="classic/7-11-2019/">7-11-2019</option>
-                        <option value="classic/9-8-2019/">9-8-2019</option>
+                        <option value="https://scratch.mit.edu/projects/14005697/fullscreen/" selected>scratch: 2015</option>
+                        <option value="https://scratch.mit.edu/projects/22573757/fullscreen/" selected>scratch: 2015</option>
+                        <option value="https://codepen.io/lilgreenland/full/ozXNWZ" selected>codepen: 2016</option>
+                        <option value="https://codepen.io/lilgreenland/full/wzARJY">codepen: 2016</option>
+                        <option value="classic/7-1-2017/">n-gon: 2017</option>
+                        <option value="classic/1-4-2018/">n-gon: 2018</option>
+                        <option value="classic/7-11-2019/">n-gon: 2019</option>
+                        <option value="classic/9-8-2019/">n-gon: 2019</option>
                     </select>
                     <br>
                     <label for="fps-select" title="use this to slow the game down">limit frames per second:</label>
@@ -186,7 +189,7 @@
                             <td id='key-pause' class='key-input'>P</td>
                             <td></td>
                         </tr>
-                        <tr>
+                        <tr id="control-testing">
                             <th>TESTING</th>
                             <td id='key-testing' class='key-input'>T</td>
                             <td></td>
@@ -327,7 +330,7 @@
             animation: dash 5s ease-in forwards;
         }
     </style>
-    <svg id='splash' class="intro" viewBox="0 0 800 800" onclick="game.startGame()">
+    <svg id='splash' class="intro" viewBox="0 0 800 800" onclick="simulation.startGame()">
         <!-- title -->
         <!-- <g class="fade-in" transform="translate(100,210) scale(34)" fill='#bbb' stroke='none'>
 			<path d="M0 0  h1  v0.2  h1.7  l0.3 0.3  v2.6  h-1  v-1.7  h-1  v1.7  h-1 z" fill="rgb(50,200,255)" />
@@ -362,7 +365,7 @@
 		</g> -->
         <!-- mouse -->
         <g class="draw-lines3" transform="translate(290,430) scale(0.28)" stroke-linecap="round" stroke-linejoin="round" stroke-width="10px" stroke="#222" fill="none">
-            <path class="fade-in" d="M832.41,106.64 V323.55 H651.57 V256.64 c0-82.5,67.5-150,150-150 Z" fill="rgb(0, 200, 255)" stroke="none" />
+            <path class="fade-in" d="M832.41,106.64 V322 H651.57 V255 c0-82,67.5-148,150-148 Z" fill="rgb(0, 200, 255)" stroke="none" />
             <!-- <path class="fade-in" d="M832.41,106.64 V323.55 H651.57 V256.64 c0-82.5,67.5-150,150-150 Z" fill="#789" stroke="none" />
 			<path class="fade-in" d="M827,112 h30 a140,140,0,0,1,140,140 v68 h-167 z" fill="#7ce" stroke="none" /> -->
             <path d="M827,112 h30 a140,140,0,0,1,140,140 v268 a140,140,0,0,1-140,140 h-60 a140,140,0,0,1-140-140v-268 a140,140,0,0,1,140-140h60" />
@@ -371,7 +374,7 @@
         </g>
         <!-- keys -->
         <g transform="translate(195,480) scale(0.8)">
-            <g fill='none' stroke='#222' stroke-width="3.5" stroke-linejoin="round">
+            <g fill='none' stroke='#222' stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
                 <path d="M0 60 h60 v-60 h-60 v60" class="draw-lines-box-1" />
                 <path d="M70 60 h60 v-60 h-60 v60" class="draw-lines-box-2" />
                 <path d="M140 60 h60 v-60 h-60 v60" class="draw-lines-box-3" />
@@ -553,15 +556,16 @@
     <script src='lib/matter.min.js'></script>
     <script src='lib/decomp.min.js'></script>
     <script src='lib/randomColor.min.js'></script>
-    <script src="js/game.js"></script>
+    <script src="js/simulation.js"></script>
     <script src="js/player.js"></script>
     <script src="js/powerup.js"></script>
-    <script src="js/mods.js"></script>
+    <script src="js/tech.js"></script>
     <script src="js/bullet.js"></script>
     <script src="js/mob.js"></script>
     <script src="js/spawn.js"></script>
     <script src="js/level.js"></script>
-    <script src="js/visibility.js"></script>
+    <!-- <script src="js/visibility.js"></script> -->
+    <script src="js/lore.js"></script>
     <script src="js/engine.js"></script>
     <script src="js/index.js"></script>
 </body>

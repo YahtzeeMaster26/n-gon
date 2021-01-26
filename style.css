@@ -42,6 +42,10 @@ a {
     color: #08c;
 }
 
+em {
+    opacity: 0.7;
+}
+
 #splash {
     user-select: none;
     position: absolute;
@@ -90,7 +94,7 @@ summary {
 }
 
 .SVG-button {
-    border: 2px #333 solid;
+    border: 1.5px #333 solid;
     border-radius: 9px;
     background-color: #fff;
 }
@@ -99,7 +103,7 @@ summary {
     background-color: #e8e8ee;
 }
 
-#build-button {
+#experiment-button {
     position: absolute;
     bottom: 3px;
     right: 3px;
@@ -108,13 +112,13 @@ summary {
 
 #choose-background {
     position: absolute;
-    z-index: 2;
+    z-index: 3;
     width: 100%;
     height: 100%;
     display: none;
-    background-color: #fff;
-    opacity: 0.5;
-    /* transition: display 0.5s; */
+    background-color: #ccc;
+    opacity: 0.6;
+    /* transition: opacity 1.5s; */
 }
 
 #construct {
@@ -142,6 +146,7 @@ summary {
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 10px;
+    grid-gap: 10px;
     margin: 0px;
     border-radius: 8px;
     z-index: 12;
@@ -149,8 +154,8 @@ summary {
     display: none;
     grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
     grid-auto-rows: minmax(auto, auto);
-    grid-gap: 10px;
     font-size: 1.3em;
+    /* box-shadow: 0px 0px 40px 20px rgba(255, 255, 255, 0.25); */
 }
 
 .choose-grid-module {
@@ -188,7 +193,7 @@ summary {
     grid-gap: 0px;
     align-content: space-between;
 
-    z-index: 10;
+    z-index: 2;
     font-size: 1.3em;
 }
 
@@ -207,12 +212,12 @@ summary {
     padding: 10px;
     line-height: 170%;
     /* border-radius: 6px; */
-    border: 2px #333 solid;
+    border: 1px #333 solid;
     background-color: #fff;
     font-size: 0.65em;
 }
 
-#build-grid {
+#experiment-grid {
     /* align-content: space-between; */
     padding: 1px;
     /* padding: 16px; */
@@ -233,12 +238,12 @@ summary {
     font-size: 1.3em;
 }
 
-.build-grid-module {
+.experiment-grid-module {
     margin: -1px;
     padding: 10px;
     line-height: 170%;
     /* border-radius: 6px; */
-    border: 2px #333 solid;
+    border: 1px #17263b solid;
     background-color: #fff;
 
     line-height: 170%;
@@ -247,11 +252,11 @@ summary {
 
 .grid-title {
     padding-bottom: 6px;
-    font-size: 1.3em;
+    font-size: 1.4em;
     font-weight: 600;
 }
 
-.build-grid-module:hover {
+.experiment-grid-module:hover {
     background-color: #efeff5;
 }
 
@@ -271,21 +276,24 @@ summary {
     background-color: hsl(218, 100%, 76%);
 }
 
-.build-mod-selected {
+.build-tech-selected {
     background-color: hsl(253, 100%, 84%);
 }
 
-.build-mod-selected:hover {
+.build-tech-selected:hover {
     background-color: hsl(253, 100%, 81%);
 }
 
-.build-grid-disabled {
-    opacity: 0.5;
-    color: #ccc;
+.experiment-grid-disabled {
+    /* opacity: 0.5; */
+    background-color: var(--build-bg-color);
+    color: rgba(0, 0, 0, 0.2);
+    /* transition: background-color 1s, color 1s; */
 }
 
-.build-grid-disabled:hover {
-    background-color: #fff;
+.experiment-grid-disabled:hover {
+    /* background-color: #fff; */
+    background-color: var(--build-bg-color);
 }
 
 #info {
@@ -309,7 +317,7 @@ summary {
     width: 100%;
     height: 100%;
     display: none;
-    /* background-color also set in mass-energy mod */
+    /* background-color also set in mass-energy tech */
     background-color: #f67;
     opacity: 0;
     transition: opacity 1s;
@@ -320,7 +328,8 @@ summary {
     top: 15px;
     left: 15px;
     height: 20px;
-    width: 300px;
+    width: 0px;
+    transition: width 1s ease-out;
     background-color: #000;
     opacity: 0.1;
     z-index: 1;
@@ -372,8 +381,9 @@ summary {
     left: 15px;
     z-index: 2;
     font-size: 23px;
-    color: #111;
+    color: #222;
     background-color: rgba(255, 255, 255, 0.4);
+    line-height: 120%;
     user-select: none;
     pointer-events: none;
     padding: 0px 5px 0px 5px;
@@ -390,7 +400,7 @@ summary {
     color: #000;
     text-align: right;
     opacity: 0.7;
-    line-height: 140%;
+    /* line-height: 140%;    */
     background-color: rgba(190, 210, 245, 0.25);
     user-select: none;
     pointer-events: none;
@@ -399,16 +409,16 @@ summary {
     /*border: 2px solid rgba(0, 0, 0, 0.4);*/
 }
 
-#mods {
+#tech {
     position: absolute;
     top: 60px;
     right: 15px;
     z-index: 2;
     font-size: 20px;
-    color: #000;
+    color: #222;
     text-align: right;
     opacity: 0.35;
-    line-height: 140%;
+    line-height: 130%;
     background-color: rgba(255, 255, 255, 0.4);
     user-select: none;
     pointer-events: none;
@@ -420,27 +430,66 @@ summary {
 #text-log {
     z-index: 2;
     position: absolute;
-    bottom: 20px;
-    left: 20px;
+    bottom: 10px;
+    left: 10px;
     padding: 10px;
-    border-radius: 10px;
-    line-height: 150%;
-    font-size: 1.25em;
-    color: #000;
-    background-color: rgba(255, 255, 255, 0.23);
-    opacity: 0;
+    border-radius: 4px;
+    line-height: 140%;
+    font-size: 1.15em;
+    color: #555;
+    background-color: rgba(255, 255, 255, 0.5);
     transition: opacity 0.5s;
     pointer-events: none;
     user-select: none;
 }
 
-em {
-    opacity: 0.7;
+/* color for in game console output */
+
+.color-text {
+    color: #000;
 }
 
-.mouse-icon {
-    margin-bottom: -20px;
+.color-var {
+    color: hsl(253, 100%, 58%);
 }
+
+.color-symbol {
+    color: hsl(290, 100%, 40%);
+}
+
+.color-gun {
+    color: hsl(218, 100%, 58%);
+}
+
+/* colors for pause, selection and experiment */
+
+/* #text-log {
+    z-index: 2;
+    position: absolute;
+    bottom: 4px;
+    left: 6px;
+    line-height: 130%;
+    font-size: 1.2em;
+    color: rgb(237, 15, 148);
+    transition: opacity 1s;
+    pointer-events: none;
+    user-select: none;
+}
+
+.color-text {
+    color: rgb(0, 164, 164);
+}
+
+.color-symbol {
+    color: #fff;
+}
+
+.color-gun {
+    color: hsl(218, 100%, 70%);
+} */
+
+
+
 
 .color-f {
     color: #0ad;
@@ -473,7 +522,7 @@ em {
 }
 
 .color-m {
-    color: hsl(253, 57%, 52%);
+    color: hsl(253, 100%, 50%);
     letter-spacing: 1px;
 }
 
@@ -482,9 +531,25 @@ em {
     letter-spacing: 1px;
 }
 
+.color-dup {
+    /* color: hsl(243, 100%, 38%); */
+    font-variant: small-caps;
+    letter-spacing: 1px;
+    text-shadow: 1.5px -1.5px hsla(243, 100%, 38%, 0.2);
+    /* text-decoration: underline; */
+}
+
 .color-cloaked {
     opacity: 0.25;
     letter-spacing: 1px;
+}
+
+.color-laser {
+    color: #f02;
+    /* text-shadow: 0px 0px 2px rgba(255, 0, 119, 0.3); */
+    /* text-shadow: 0px 0px 1.5px rgba(0, 0, 0, 1), 0px 0px 5px rgba(255, 0, 0, 1); */
+    font-weight: 100;
+    letter-spacing: -0.8px;
 }
 
 .color-plasma {
@@ -505,11 +570,19 @@ em {
 .color-harm {
     /* color:  */
     /* text-shadow: #FC0 1px 0 10px; */
-    background-color: hsla(325, 100%, 85%, 0.15);
+    background-color: hsla(51, 100%, 71%, 0.187);
     padding: 2px;
     border-radius: 4px;
     letter-spacing: 1px;
+    font-weight: 100;
 }
+
+/* .color-rewind {
+    background-image: linear-gradient(to left, #fff, #bbb);
+    border-radius: 5px;
+    padding: 2px;
+    letter-spacing: 1px;
+} */
 
 .color-r {
     color: #f7b;
@@ -545,7 +618,7 @@ em {
     margin-bottom: -15px;
 }
 
-.circle-gun-mod {
+.circle-gun-tech {
     box-shadow: 0 0 0 3px #025;
 }
 
@@ -563,33 +636,34 @@ em {
     background: #0cf;
 }
 
-.mod {
+.tech {
     /* background: rgb(116, 102, 238); */
-    background: hsl(253, 80%, 67%);
+    /* background: hsl(253, 57%, 52%); */
+    background: hsl(255, 100%, 71%);
+    /* background: hsl(282, 100%, 64%); */
 }
 
-.grey {
-    background: #ccc;
-}
+/* .grey {
+    background: #afb6c2;
+} */
 
 .gun {
-    background: rgb(15, 75, 179);
+    background: rgb(0, 80, 218);
 }
 
 .heal {
     background: #0d9;
 }
 
-.reroll {
+.research {
     /* #f84  #f99*/
     background: #f7b;
 }
 
-.dice {
-    font-size: 45px;
-    vertical-align: -5px;
+.research-select {
     float: right;
 }
+
 
 .box {
     padding: 3px 8px 3px 8px;
@@ -613,3 +687,115 @@ em {
 .right {
     text-align: right;
 }
+
+.lore {
+    animation: bgColor 3.5s linear infinite;
+}
+
+.lore-text {
+    animation: textColor 3s linear infinite;
+}
+
+@keyframes bgColor {
+    0% {
+        background-color: rgb(63, 218, 216)
+    }
+
+    10% {
+        background-color: rgb(47, 201, 226)
+    }
+
+    20% {
+        background-color: rgb(28, 127, 238)
+    }
+
+    30% {
+        background-color: rgb(95, 21, 242)
+    }
+
+    40% {
+        background-color: rgb(186, 12, 248)
+    }
+
+    50% {
+        background-color: rgb(251, 7, 217)
+    }
+
+    60% {
+        background-color: rgba(255, 0, 0)
+    }
+
+    70% {
+        background-color: rgb(255, 0, 0)
+    }
+
+    80% {
+        background-color: rgb(255, 154, 0)
+    }
+
+    90% {
+        background-color: rgb(208, 222, 33)
+    }
+
+    100% {
+        background-color: rgb(79, 220, 74)
+    }
+}
+
+@keyframes textColor {
+    0% {
+        color: rgb(63, 218, 216)
+    }
+
+    10% {
+        color: rgb(47, 201, 226)
+    }
+
+    20% {
+        color: rgb(28, 127, 238)
+    }
+
+    30% {
+        color: rgb(95, 21, 242)
+    }
+
+    40% {
+        color: rgb(186, 12, 248)
+    }
+
+    50% {
+        color: rgb(251, 7, 217)
+    }
+
+    60% {
+        color: rgba(255, 0, 0)
+    }
+
+    70% {
+        color: rgb(255, 0, 0)
+    }
+
+    80% {
+        color: rgb(255, 154, 0)
+    }
+
+    90% {
+        color: rgb(208, 222, 33)
+    }
+
+    100% {
+        color: rgb(79, 220, 74)
+    }
+}
+
+
+/* #console {
+    font-family: monospace;
+    font-size: 1.5em;
+    width: 300px;
+    height: 50px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    z-index: 3;
+} */
