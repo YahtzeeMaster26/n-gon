@@ -1155,7 +1155,7 @@ const mod = {
                 mech.setMaxHealth();
             },
             remove() {
-							mod.isHyperSaturation = false
+								mod.isHyperSaturation = false
                 mech.setMaxHealth();
             }
         },
