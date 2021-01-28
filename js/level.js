@@ -1,3 +1,8 @@
+/* eslint-disable strict */ // please the eslint gods
+/* eslint-disable prefer-arrow-callback */
+/* eslint-disable quotes */
+/* eslint-disable prefer-const */
+/* eslint-disable spaced-comment */
 let body = []; //non static bodies
 let map = []; //all static bodies
 let cons = []; //all constraints between a point and a body

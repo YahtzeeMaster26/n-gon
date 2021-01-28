@@ -423,6 +423,24 @@ const tech = {
             }
         },
         {
+            name: "spider-cage rotor",
+            description: "does nothing, but you get 2 more legs",
+            maxCount: 3,
+            count: 0,
+            allowed() {
+                return true
+            },
+            requires: "",
+            effect() { // good with melee builds, content skipping builds
+                tech.spiderCage += 2
+                m.setMovement()
+            },
+            remove() {
+                tech.spiderCage = 0
+                m.setMovement()
+            }
+        },
+        {
             name: "Newton's 1st law",
             description: "moving at high <strong>speeds</strong> reduces <strong class='color-harm'>harm</strong><br>by up to <strong>50%</strong>",
             maxCount: 1,
@@ -4285,5 +4303,6 @@ const tech = {
     isNeedles: null,
     isExplodeRadio: null,
     isGunSwitchField: null,
-    isNeedleShieldPierce: null
+    isNeedleShieldPierce: null,
+    spiderCage: null,
 }

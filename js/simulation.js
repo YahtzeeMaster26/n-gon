@@ -1,3 +1,8 @@
+/* eslint-disable strict */ // please the eslint gods
+/* eslint-disable prefer-arrow-callback */
+/* eslint-disable quotes */
+/* eslint-disable prefer-const */
+/* eslint-disable spaced-comment */
 // game Object ********************************************************
 //*********************************************************************
 const simulation = {

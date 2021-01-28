@@ -806,10 +806,10 @@ const m = {
         ctx.save();
         ctx.globalAlpha = (m.immuneCycle < m.cycle) ? 1 : 0.5
         ctx.translate(m.pos.x, m.pos.y);
-        m.calcLeg(Math.PI, -3);
-        m.drawLeg("#4a4a4a");
-        m.calcLeg(0, 0);
-        m.drawLeg("#333");
+        for (let i = 0; i < tech.spiderCage + 2; i++) {
+					m.calcLeg(Math.PI * i / (tech.spiderCage / 2 + 1), -3 * i / (tech.spiderCage + 2))
+					m.drawLeg("#444")
+				}
         ctx.rotate(m.angle);
 
         ctx.beginPath();
